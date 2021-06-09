@@ -9,7 +9,7 @@
 
 ## Overview
 
-The goal of this project is to create an application to track my full Spotify listening history over time. The Spotify application only shows a limited number of plays and the Spotify Web API only allows users to access up to their fifty most recent plays. To view the output of a version of the application in deployment, [visit](http://www.mikejjenkinson.com/listening) my personal page.
+The goal of this project was to create an application to track my full Spotify listening history over time. The Spotify application only shows a limited number of plays and the Spotify Web API only allows users to access up to their fifty most recent plays, so this application checks for new plays at a fast enough rate (currently every minute) to record the fully play history in a local database before fifty new plays can occur. To view an aggregated summary of the application output in active deployment, [visit](http://www.mikejjenkinson.com/listening) my personal page.
 
 The main Python application, when run once, works as follows:
 
@@ -47,7 +47,7 @@ Follow these instructions to set up and run the application in `spotipy/spot.py`
 
 ## Automation 
 
-I opted to use *cron* in UNIX as a lightweight way to schedule runs of `<folder>/spotipy/spot.py` at periodic intervals. While I currently do not know the rate limit for requests to the Spotify API through the authorized Spotipy instance, my current deployment tracked [here](http://www.mikejjenkinson.com/listening) updates at intervals of fifteen minutes since it is unlikely that I will listen to more than fifty tracks in that interval.  
+I opted to use *cron* in UNIX as a lightweight way to schedule runs of `<folder>/spotipy/spot.py` at periodic intervals. While I currently do not know the rate limit for requests to the Spotify API through the authorized Spotipy instance, my current deployment tracked [here](http://www.mikejjenkinson.com/listening) updates at intervals of one minute since it is impossible to listen to more than fifty tracks in that interval. The fastest rate by which we can send requests to the Spotify API is currently untested.  
 
 Create a file `cronscript.sh` in your `<folder>` directory containing the line
 
