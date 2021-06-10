@@ -44,6 +44,7 @@ def updatePlayHistory():
     # Counting plays
     j = 1
 
+    # Construct new simple dataframe of new play history by unnesting json. 
     for its in results['items']:
 
         allArtists = ''
@@ -98,6 +99,7 @@ def updatePlayHistory():
     # Convert to date-time so comparison of duplicates works with histOLD; issue with loading json from file
     htemp = histDFjson['played_at']
 
+    # Combine new and old json format plays.
     histDFjson  = histDFjson.head(len(newPlays))
     histNewjson = histDFjson.append(histOLDjson)
 
@@ -106,8 +108,6 @@ def updatePlayHistory():
     histNew = histNew.set_index(indNew)
     histNew.to_csv(csvf, sep=',', encoding='utf-8',index_label='id')
     histNewjson.to_json(jsonf, orient='records')    
-
-
 
     # Update play history playlist on my account
     if len(newPlays) > 0:
